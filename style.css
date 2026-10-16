@@ -1,0 +1,1025 @@
+/* flashmao.top - 三棱镜分光光谱高定风 (Prism Refraction & Chromatic Spectrum) */
+:root {
+  --prism-bg: #f8fafc;
+  --prism-card-bg: #ffffff;
+  --prism-dark: #0f172a;
+  --prism-slate: #334155;
+  --prism-muted: #64748b;
+  --prism-border: #e2e8f0;
+  --spec-cyan: #06b6d4;
+  --spec-magenta: #ec4899;
+  --spec-amber: #f59e0b;
+  --prism-gradient: linear-gradient(135deg, #06b6d4 0%, #ec4899 50%, #f59e0b 100%);
+  --prism-line-grad: linear-gradient(90deg, #06b6d4, #ec4899, #f59e0b);
+  --prism-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--prism-bg);
+  color: var(--prism-dark);
+  font-family: var(--prism-font);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--spec-cyan);
+  text-decoration: none;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+a:hover {
+  color: var(--spec-magenta);
+  text-decoration: underline;
+}
+
+.prism-post-content a,
+.prism-doc-card a,
+.prism-article-container a,
+.prism-insight-card a,
+.prism-return-nav {
+  color: var(--spec-cyan) !important;
+}
+
+.prism-post-content a:visited,
+.prism-doc-card a:visited,
+.prism-article-container a:visited,
+.prism-insight-card a:visited,
+.prism-return-nav:visited {
+  color: var(--spec-cyan) !important;
+}
+
+.prism-post-content a:hover,
+.prism-doc-card a:hover,
+.prism-article-container a:hover,
+.prism-insight-card a:hover,
+.prism-return-nav:hover {
+  color: var(--spec-magenta) !important;
+  text-decoration: underline;
+}
+
+/* 顶部三棱镜细线导航栏 */
+.prism-nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(248, 250, 252, 0.96);
+  border-bottom: 1px solid var(--prism-border);
+  backdrop-filter: blur(8px);
+}
+
+.prism-spectrum-top-line {
+  height: 2px;
+  background: var(--prism-line-grad);
+  width: 100%;
+}
+
+.prism-nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 整合主题 Logo */
+.prism-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.prism-logo-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid var(--prism-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.prism-logo-svg {
+  width: 28px;
+  height: 28px;
+}
+
+.prism-brand-name {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--prism-dark);
+}
+
+.prism-edition-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+  background: var(--prism-gradient);
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.prism-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.prism-links a,
+.prism-links a:visited {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--prism-slate) !important;
+  transition: color 0.2s ease;
+  text-decoration: none !important;
+}
+
+.prism-links a:hover {
+  color: var(--spec-cyan) !important;
+}
+
+.prism-nav-login,
+.prism-nav-login:visited {
+  padding: 8px 18px;
+  background: #ffffff;
+  border: 1px solid var(--prism-border);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--prism-dark) !important;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  text-decoration: none !important;
+}
+
+.prism-nav-login:hover {
+  border-color: var(--spec-cyan);
+  color: var(--spec-cyan) !important;
+}
+
+/* Hero Section */
+.refraction-hero {
+  max-width: 1200px;
+  margin: 60px auto 40px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 56px;
+}
+
+.prism-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--spec-magenta);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.prism-kicker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--spec-magenta);
+}
+
+.prism-headline {
+  font-size: 46px;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  color: var(--prism-dark);
+  margin-bottom: 20px;
+}
+
+.prism-text-gradient {
+  background: var(--prism-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.prism-subtitle {
+  font-size: 17px;
+  color: var(--prism-muted);
+  line-height: 1.75;
+  margin-bottom: 36px;
+  max-width: 520px;
+}
+
+.prism-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-prism-primary,
+.btn-prism-primary:visited {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  background: var(--prism-dark);
+  color: #ffffff !important;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.2);
+  min-height: 48px;
+  text-decoration: none !important;
+}
+
+.btn-prism-primary:hover {
+  background: #1e293b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.3);
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+.btn-prism-recommend,
+.btn-prism-recommend:visited {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 26px;
+  background: #ffffff;
+  color: var(--prism-dark) !important;
+  border: 1px solid var(--prism-border);
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+  min-height: 48px;
+  text-decoration: none !important;
+}
+
+.btn-prism-recommend:hover {
+  border-color: var(--spec-cyan);
+  color: var(--spec-cyan) !important;
+  transform: translateY(-2px);
+  text-decoration: none !important;
+}
+
+.prism-visual-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prism-cat-artwork {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  filter: drop-shadow(0 12px 28px rgba(6, 182, 212, 0.12));
+}
+
+/* 分光导轨分割线 */
+.spectrum-beam-rule {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 0 24px;
+}
+
+.spectrum-beam-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--spec-cyan) 30%, var(--spec-magenta) 70%, transparent 100%);
+}
+
+/* 区块公用规范 */
+.prism-section {
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 0 24px;
+}
+
+.prism-header-center {
+  text-align: center;
+  margin-bottom: 54px;
+}
+
+.prism-title-lg {
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--prism-dark);
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.prism-lead-desc {
+  font-size: 16px;
+  color: var(--prism-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 核心优势（差异化标题，4项） */
+.prism-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.prism-facet-card {
+  background: var(--prism-card-bg);
+  border: 1px solid var(--prism-border);
+  border-radius: 8px;
+  padding: 32px 24px;
+  position: relative;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+}
+
+.prism-facet-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--prism-line-grad);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.prism-facet-card:hover {
+  transform: translateY(-4px);
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+.prism-facet-card:hover::before {
+  opacity: 1;
+}
+
+.prism-icon-container {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.prism-outline-svg {
+  width: 26px;
+  height: 26px;
+}
+
+.prism-card-heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--prism-dark);
+  margin-bottom: 10px;
+}
+
+.prism-card-body {
+  font-size: 14px;
+  color: var(--prism-muted);
+  line-height: 1.65;
+}
+
+/* 流媒体与AI模块（4项） */
+.prism-grid-media {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.prism-media-box {
+  background: var(--prism-card-bg);
+  border: 1px solid var(--prism-border);
+  border-radius: 8px;
+  padding: 26px 20px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02);
+}
+
+.prism-spec-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--spec-cyan);
+  background: #ecfeff;
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+}
+
+.prism-media-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--prism-dark);
+  margin-bottom: 8px;
+}
+
+.prism-media-text {
+  font-size: 13px;
+  color: var(--prism-muted);
+  line-height: 1.6;
+}
+
+/* 价格对比表（严格3项） */
+.prism-pricing-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.prism-tier-card {
+  background: var(--prism-card-bg);
+  border: 1px solid var(--prism-border);
+  border-radius: 10px;
+  padding: 38px 28px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+}
+
+.prism-tier-card.highlight {
+  border-color: var(--spec-cyan);
+  box-shadow: 0 8px 30px rgba(6, 182, 212, 0.12);
+  transform: scale(1.02);
+}
+
+.prism-badge-top {
+  position: absolute;
+  top: -12px;
+  right: 24px;
+  background: var(--prism-gradient);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.prism-tier-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--prism-dark);
+  margin-bottom: 6px;
+}
+
+.prism-tier-subtitle {
+  font-size: 13px;
+  color: var(--prism-muted);
+  margin-bottom: 24px;
+}
+
+.prism-tier-cost {
+  margin-bottom: 26px;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.prism-sym {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--spec-cyan);
+}
+
+.prism-amount {
+  font-size: 46px;
+  font-weight: 900;
+  color: var(--prism-dark);
+}
+
+.prism-period {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--prism-muted);
+}
+
+.prism-feature-ul {
+  list-style: none;
+  margin-bottom: 34px;
+  flex-grow: 1;
+}
+
+.prism-feature-ul li {
+  font-size: 14px;
+  color: var(--prism-slate);
+  padding: 9px 0;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prism-beam-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--spec-cyan);
+  flex-shrink: 0;
+}
+
+.prism-order-btn,
+.prism-order-btn:visited {
+  display: block;
+  text-align: center;
+  padding: 13px 20px;
+  background: #f1f5f9;
+  color: var(--prism-dark) !important;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  min-height: 46px;
+  line-height: 20px;
+  text-decoration: none !important;
+}
+
+.prism-tier-card.highlight .prism-order-btn,
+.prism-tier-card.highlight .prism-order-btn:visited {
+  background: var(--prism-dark);
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+.prism-order-btn:hover {
+  background: var(--spec-cyan);
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* 真实评价（3项） */
+.prism-grid-reviews {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.prism-opinion-card {
+  background: var(--prism-card-bg);
+  border: 1px solid var(--prism-border);
+  border-radius: 8px;
+  padding: 28px 24px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+.prism-commentary {
+  font-size: 14px;
+  color: var(--prism-slate);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-style: normal;
+}
+
+.prism-client-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.prism-client-initial {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: var(--spec-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.prism-client-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--prism-dark);
+}
+
+.prism-client-post {
+  font-size: 12px;
+  color: var(--prism-muted);
+}
+
+/* 常见问答 FAQ（4项） */
+.prism-faq-wrapper {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.prism-faq-row {
+  background: var(--prism-card-bg);
+  border: 1px solid var(--prism-border);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02);
+}
+
+.prism-faq-row summary {
+  padding: 20px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--prism-dark);
+  cursor: pointer;
+  list-style: none;
+}
+
+.prism-faq-row summary::-webkit-details-marker {
+  display: none;
+}
+
+.prism-faq-content {
+  padding: 0 24px 20px;
+  font-size: 14px;
+  color: var(--prism-muted);
+  line-height: 1.75;
+}
+
+/* 页脚：严格仅显示 4 个中文标题，各自打开独立页面 */
+.prism-clean-footer {
+  border-top: 1px solid var(--prism-border);
+  background: #ffffff;
+  padding: 42px 24px;
+  margin-top: 60px;
+}
+
+.prism-footer-menu {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.prism-footer-btn,
+.prism-footer-btn:visited {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--prism-slate) !important;
+  transition: color 0.2s ease;
+  text-decoration: none !important;
+}
+
+.prism-footer-btn:hover {
+  color: var(--spec-cyan) !important;
+}
+
+/* 独立内页 */
+.prism-article-container {
+  max-width: 860px;
+  margin: 50px auto;
+  padding: 0 24px;
+}
+
+.prism-doc-card {
+  background: #ffffff;
+  border: 1px solid var(--prism-border);
+  border-radius: 10px;
+  padding: 48px 40px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+}
+
+.prism-doc-heading {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--prism-dark);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--prism-border);
+}
+
+.prism-doc-card h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--prism-dark);
+  margin: 28px 0 12px;
+}
+
+.prism-doc-card p {
+  color: var(--prism-muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+  font-size: 15px;
+}
+
+.prism-doc-card ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+  color: var(--prism-muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.prism-return-nav {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 26px;
+  color: var(--spec-cyan);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* 移动端媒体查询 (@media) */
+@media (max-width: 992px) {
+  .refraction-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 20px;
+    gap: 36px;
+  }
+  .prism-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .prism-cta-row {
+    justify-content: center;
+  }
+  .prism-grid-4,
+  .prism-grid-media {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .prism-pricing-row {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .prism-tier-card.highlight {
+    transform: none;
+  }
+  .prism-grid-reviews {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .prism-nav-container {
+    flex-wrap: wrap;
+    padding: 10px 16px 8px;
+    gap: 8px 12px;
+  }
+  .prism-brand {
+    order: 1;
+  }
+  .prism-nav-login,
+  .prism-nav-login:visited {
+    order: 2;
+    padding: 6px 14px;
+    font-size: 13px;
+    min-height: 34px;
+  }
+  .prism-links {
+    order: 3;
+    width: 100%;
+    display: flex !important;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 16px;
+    padding: 6px 0 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    border-top: 1px solid var(--prism-border);
+  }
+  .prism-links::-webkit-scrollbar {
+    display: none;
+  }
+  .prism-links a,
+  .prism-links a:visited {
+    font-size: 13px;
+    padding: 4px 0;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .prism-nav-container {
+    padding: 8px 16px 6px;
+  }
+  .refraction-hero {
+    margin-top: 24px;
+    padding: 0 16px;
+  }
+  .prism-headline {
+    font-size: 32px;
+  }
+  .prism-cta-row {
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn-prism-primary,
+  .btn-prism-recommend {
+    width: 100%;
+    min-height: 50px;
+  }
+  .prism-grid-4,
+  .prism-grid-media {
+    grid-template-columns: 1fr;
+  }
+  .prism-footer-menu {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .prism-doc-card {
+    padding: 28px 20px;
+  }
+}
+
+/* 光谱观察高定专栏聚合与正文样式 */
+.prism-insights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px;
+  margin-top: 36px;
+}
+
+.prism-insight-card {
+  background: var(--prism-card-bg);
+  border: 1px solid var(--prism-border);
+  border-radius: 8px;
+  padding: 30px 26px;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+.prism-insight-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--prism-line-grad);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.prism-insight-card:hover {
+  transform: translateY(-4px);
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+}
+
+.prism-insight-card:hover::before {
+  opacity: 1;
+}
+
+.prism-insight-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--prism-muted);
+  margin-bottom: 12px;
+}
+
+.prism-insight-badge {
+  color: var(--spec-cyan);
+  background: #ecfeff;
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.prism-insight-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--prism-dark);
+  line-height: 1.45;
+  margin-bottom: 12px;
+}
+
+.prism-insight-card:hover .prism-insight-title {
+  color: var(--spec-cyan);
+}
+
+.prism-insight-abstract {
+  font-size: 14px;
+  color: var(--prism-muted);
+  line-height: 1.65;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.prism-insight-more {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--spec-magenta);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 高定文章正文排版 */
+.prism-post-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--prism-border);
+}
+
+.prism-post-h1 {
+  font-size: 34px;
+  font-weight: 900;
+  color: var(--prism-dark);
+  line-height: 1.35;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.prism-post-meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 13px;
+  color: var(--prism-muted);
+  font-weight: 600;
+}
+
+.prism-post-content {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--prism-slate);
+}
+
+.prism-post-content h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--prism-dark);
+  margin: 36px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--prism-border);
+}
+
+.prism-post-content h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--spec-cyan);
+  margin: 24px 0 12px;
+}
+
+.prism-post-content p {
+  margin-bottom: 20px;
+  color: var(--prism-slate);
+}
+
+.prism-post-content ul, .prism-post-content ol {
+  margin-bottom: 22px;
+  padding-left: 24px;
+}
+
+.prism-post-content li {
+  margin-bottom: 8px;
+  color: var(--prism-slate);
+}
+
+.prism-post-content blockquote {
+  border-left: 3px solid var(--spec-cyan);
+  background: #f8fafc;
+  border: 1px solid var(--prism-border);
+  border-left-width: 4px;
+  border-radius: 6px;
+  padding: 18px 24px;
+  margin: 24px 0;
+  color: var(--prism-dark);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .prism-insights-grid {
+    grid-template-columns: 1fr;
+  }
+  .prism-post-h1 {
+    font-size: 26px;
+  }
+}
